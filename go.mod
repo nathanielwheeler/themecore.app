@@ -1,4 +1,4 @@
-module github.com/heroku/go-getting-started
+module github.com/nathanielwheeler/theme-core
 
 go 1.12
 

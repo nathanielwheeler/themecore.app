@@ -1,12 +1,12 @@
 {
-  "name": "Start on Heroku: Go",
-  "description": "Go Getting Started Example App",
-  "keywords": [
-    "getting-started",
-    "go",
-    "sample",
-    "example"
-  ],
-  "website": "http://github.com/heroku/go-getting-started",
-  "repository": "http://github.com/heroku/go-getting-started"
+	"name": "Theme Core",
+	"description": "A Theme System webapp for logging and tracking journal pages.",
+	"keywords": [
+		"go",
+		"theme system",
+		"journal",
+		"tracker"
+	],
+	"website": "http://themecore.app",
+	"repository": "http://github.com/nathanielwheeler/theme-core"
 }
