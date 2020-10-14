@@ -1,6 +1,7 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,8 +11,8 @@ import (
 )
 
 type server struct {
-	router  *mux.Router
-	logger  *log.Logger
+	router *mux.Router
+	logger *log.Logger
 	spaDir string
 }
 
@@ -36,14 +37,35 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // Run starts the server and returns an error to main if anything goes wrong.
 func Run() error {
+  s := newServer()
+
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		s.logError("env:PORT is missing", nil)
 	}
-
-	s := newServer()
 
 	s.logger.Printf("Now listening on %s...\n", port)
 	http.ListenAndServe(port, s.router)
 	return nil
+}
+
+// Helpers
+
+func (s *server) respond(w http.ResponseWriter, r *http.Request, data interface{}, status int) {
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(status)
+	if data != nil {
+    err := json.NewEncoder(w).Encode(data)
+    if err != nil {
+      s.logError("JSON Encoding failed", err)
+    }
+	}
+}
+
+func (s *server) logError(message string, err interface{}) {
+  s.logger.Fatalf("%s\n\t%s", message, err)
+}
+
+func (s *server) logMsg(message string) {
+  s.logger.Println(message)
 }
