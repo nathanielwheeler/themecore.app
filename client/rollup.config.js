@@ -39,10 +39,22 @@ export default {
 	},
 	plugins: [
 		svelte({
+			// Preprocess Sass
+			preprocess: sveltePreprocess({
+				sourceMap: !production,
+				defaults: {
+					script: 'typescript',
+					style: 'sass'
+				},
+				sass: {
+					prependData: `@import 'src/styles/main.sass'`
+				},
+				postcss: {
+					plugins: [require('autoprefixer')()]
+				}
+			}),
 			// enable run-time checks when not in production
 			dev: !production,
-			// Preprocess Sass
-			preprocess: sveltePreprocess(),
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {

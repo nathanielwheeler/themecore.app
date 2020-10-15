@@ -1,4 +1,9 @@
 .vscode
+__debug_bin
+
 .env
-.docker_build/
 bin/
+.docker_build/
+
+.fresh
+runner.conf
