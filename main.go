@@ -5,8 +5,6 @@ import (
 	"os"
 
 	"themecore.app/server"
-
-	_ "github.com/heroku/x/hmetrics/onload"
 )
 
 func main() {
