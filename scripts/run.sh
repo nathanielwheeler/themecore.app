@@ -2,8 +2,6 @@
 
 cd $GOSRC/themecore.app
 
-source scripts/getenv.sh
-
 # Start client
 cd client
 rollup -c -w &
