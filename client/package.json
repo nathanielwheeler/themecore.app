@@ -1,5 +1,5 @@
 {
-  "name": "theme-core",
+  "name": "themecore.app",
   "version": "1.0.0",
   "scripts": {
     "build": "rollup -c",
