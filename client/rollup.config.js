@@ -10,7 +10,7 @@ const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
 	let server;
-	
+
 	function toExit() {
 		if (server) server.kill(0);
 	}
@@ -77,13 +77,10 @@ export default {
 			inlineSources: !production
 		}),
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
-
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
 		!production && livereload('public'),
+		!production && livereload('src'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
