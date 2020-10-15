@@ -1,0 +1,4 @@
+themecore.app {
+	encode gzip
+	reverse_proxy localhost:1729
+}
