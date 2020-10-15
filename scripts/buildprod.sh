@@ -11,8 +11,7 @@ echo "Updating server dependencies..."
 git pull origin main
 /usr/local/go/bin/go get -u ./...
 echo "Updating client dependencies..."
-cd client
-npm install
+source $srcDir/client/clientbuild.sh
 
 # Push changes to github
 echo "Pushing changes to origin..."
