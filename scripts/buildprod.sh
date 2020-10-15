@@ -27,7 +27,7 @@ rm -rf client
 
 # Build
 echo "Building server..."
-/usr/local/go/bin/go build -o ./server $srcDir
+/usr/local/go/bin/go build -o ./server $srcDir/*.go
 echo "Building client..."
 cp -R $srcDir/client .
 cp $srcDir/Caddyfile .
