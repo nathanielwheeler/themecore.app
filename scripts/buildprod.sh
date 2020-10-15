@@ -7,9 +7,12 @@ prodDir=$HOME/app
 
 # Update dependencies
 cd $srcDir
-echo "Updating dependencies..."
+echo "Updating server dependencies..."
 git pull origin main
 /usr/local/go/bin/go get -u ./...
+echo "Updating client dependencies..."
+cd client
+npm install
 
 # Push changes to github
 echo "Pushing changes to origin..."
@@ -20,7 +23,7 @@ git push origin main
 # Delete local binary and client if it exists
 cd $prodDir
 echo "Removing previous build..."
-rm themecore.app
+rm server
 rm -rf client
 
 # Build
