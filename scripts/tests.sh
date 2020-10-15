@@ -20,3 +20,5 @@ if [[ $testResult == *"FAIL"* ]]; then
 	echo "Tests failed.  Process aborted."
 	exit 1
 fi
+
+echo "All tests passed!"
