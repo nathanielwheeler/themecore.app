@@ -1,6 +1,8 @@
 #!/bin/bash
-
-cd $GOSRC/themecore.app
+if [[ ! -e main.go ]]; then
+	echo "Invalid directory"
+	exit 1
+fi
 
 # Start client
 cd client

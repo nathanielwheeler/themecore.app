@@ -10,6 +10,7 @@ cd $srcDir
 echo "Updating server dependencies..."
 git pull origin main
 /usr/local/go/bin/go get -u ./...
+go test -i .
 echo "Updating client dependencies..."
 source $srcDir/client/clientbuild.sh
 
@@ -18,6 +19,13 @@ echo "Pushing changes to origin..."
 git add .
 git commit -m "automatic dependency update"
 git push origin main
+
+# Test changes in production
+testResult=$(go test .)
+if [[ $testResult == *"FAIL"* ]]; then
+	echo "Production tests failed.  Aborting release."
+	exit 1
+fi
 
 # Delete local binary and client if it exists
 cd $prodDir
