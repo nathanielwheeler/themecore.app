@@ -1,1 +1,1 @@
-web: bin/theme-core
+web: bin/theme-core.app
