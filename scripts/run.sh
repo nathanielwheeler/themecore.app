@@ -6,6 +6,7 @@ fi
 
 # Start client
 cd client
+sass --watch src/styles:public &
 rollup -c -w &
 
 cd ..
