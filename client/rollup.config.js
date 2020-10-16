@@ -5,12 +5,13 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import preprocess from 'svelte-preprocess'
 
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
 	let server;
-
+	
 	function toExit() {
 		if (server) server.kill(0);
 	}
@@ -39,20 +40,6 @@ export default {
 	},
 	plugins: [
 		svelte({
-			// Preprocess Sass
-			preprocess: sveltePreprocess({
-				sourceMap: !production,
-				defaults: {
-					script: 'typescript',
-					style: 'sass'
-				},
-				sass: {
-					prependData: `@import 'src/styles/main.sass'`
-				},
-				postcss: {
-					plugins: [require('autoprefixer')()]
-				}
-			}),
 			// enable run-time checks when not in production
 			dev: !production,
 			// we'll extract any component CSS out into
@@ -60,6 +47,8 @@ export default {
 			css: css => {
 				css.write('bundle.css');
 			},
+			preprocess: sveltePreprocess(),
+			preprocess: preprocess()
 		}),
 
 		// If you have external dependencies installed from
@@ -77,10 +66,13 @@ export default {
 			inlineSources: !production
 		}),
 
+		// In dev mode, call `npm run start` once
+		// the bundle has been generated
+		!production && serve(),
+
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
 		!production && livereload('public'),
-		!production && livereload('src'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
